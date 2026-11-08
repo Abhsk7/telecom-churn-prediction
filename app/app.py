@@ -1,6 +1,6 @@
 """
 Telecom Customer Churn Prediction Dashboard
-Theme: Classic Burgundy & Beige | Game of Thrones (Cinzel) + Vintage Typewriter (Special Elite)
+Theme: Classic Burgundy & Beige | High Contrast Black Text & Game of Thrones (Cinzel)
 Verveox Technologies AI/ML Internship - Project 5
 """
 
@@ -19,25 +19,83 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Apply Classic Burgundy & Beige + Game of Thrones (Cinzel) + Vintage Typewriter (Special Elite)
+# Apply High-Contrast Classic Burgundy & Beige + Solid Black Text
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:wght@400;600;700&family=Special+Elite&display=swap');
 
-/* Main App Canvas - Warm Parchment Beige */
+/* Main Canvas - Warm Beige */
 .stApp {
     background-color: #F7F3EB !important;
-    color: #380C14 !important;
+    color: #000000 !important;
     font-family: 'Cormorant Garamond', Georgia, serif !important;
 }
 
-/* Headings in Game of Thrones / Cinzel Serif */
+/* Headings */
 h1, h2, h3, h4, h5, h6, .stTitle {
     font-family: 'Cinzel', serif !important;
-    color: #540D1A !important;
+    color: #4A0E17 !important;
     letter-spacing: 1.5px !important;
     text-transform: uppercase !important;
-    font-weight: 700 !important;
+    font-weight: 900 !important;
+}
+
+/* General Body Paragraphs & Descriptions - Solid Black */
+p, li {
+    color: #111111 !important;
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: 1.15rem !important;
+}
+
+/* Form Input Labels - Crisp Bold Black */
+label, .stSelectbox label, .stSlider label, .stNumberInput label {
+    font-family: 'Cinzel', serif !important;
+    font-weight: 800 !important;
+    color: #000000 !important;
+    letter-spacing: 1px !important;
+    font-size: 1rem !important;
+}
+
+/* ==========================================
+   NAVIGATION TABS - HIGH CONTRAST FIX
+   ========================================== */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 8px;
+    border-bottom: 2.5px solid #4A0E17 !important;
+    background-color: transparent !important;
+    padding-bottom: 2px;
+}
+
+/* INACTIVE TABS - SOLID BOLD BLACK TEXT */
+.stTabs [data-baseweb="tab"] {
+    background-color: #E5DAC8 !important;
+    border: 1.5px solid #C4A47C !important;
+    border-bottom: none !important;
+    border-radius: 6px 6px 0 0 !important;
+    padding: 10px 22px !important;
+    transition: all 0.2s ease !important;
+}
+.stTabs [data-baseweb="tab"] p, 
+.stTabs [data-baseweb="tab"] span, 
+.stTabs [data-baseweb="tab"] div {
+    font-family: 'Cinzel', serif !important;
+    font-size: 1.05rem !important;
+    font-weight: 900 !important;
+    color: #000000 !important; /* FIXED: Solid black for clear visibility */
+    letter-spacing: 1px !important;
+}
+
+/* ACTIVE TAB - DEEP BURGUNDY WITH WHITE TEXT */
+.stTabs [aria-selected="true"] {
+    background-color: #540D1A !important;
+    border: 2px solid #540D1A !important;
+    border-bottom: none !important;
+}
+.stTabs [aria-selected="true"] p, 
+.stTabs [aria-selected="true"] span, 
+.stTabs [aria-selected="true"] div {
+    color: #FFFFFF !important; /* Crisp white on active burgundy */
+    font-weight: 900 !important;
 }
 
 /* Sidebar - Deep Imperial Burgundy */
@@ -55,24 +113,15 @@ h1, h2, h3, h4, h5, h6, .stTitle {
     font-size: 1.15rem !important;
 }
 
-/* Form Input Labels */
-label, .stSelectbox label, .stSlider label, .stNumberInput label {
-    font-family: 'Cinzel', serif !important;
-    font-weight: 700 !important;
-    color: #4A0E17 !important;
-    letter-spacing: 1px !important;
-    font-size: 0.95rem !important;
-}
-
 /* Regal Burgundy & Gold Button */
 .stButton > button {
     font-family: 'Cinzel', serif !important;
-    font-weight: 700 !important;
+    font-weight: 800 !important;
     font-size: 1.1rem !important;
     letter-spacing: 2px !important;
     text-transform: uppercase !important;
     background: linear-gradient(135deg, #6B1D2F 0%, #440A12 100%) !important;
-    color: #F7F3EB !important;
+    color: #FFFFFF !important;
     border: 2px solid #C4A47C !important;
     border-radius: 4px !important;
     box-shadow: 0 4px 12px rgba(62, 10, 17, 0.35) !important;
@@ -80,39 +129,14 @@ label, .stSelectbox label, .stSlider label, .stNumberInput label {
     transition: all 0.3s ease !important;
 }
 .stButton > button:hover {
-    background: linear-gradient(135deg, #7E1E34 0%, #570D18 100%) !important;
+    background: linear-gradient(135deg, #800020 0%, #5A111E 100%) !important;
     border-color: #E2C799 !important;
     color: #FFFFFF !important;
     transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(62, 10, 17, 0.5) !important;
 }
 
-/* Navigation Tabs */
-.stTabs [data-baseweb="tab-list"] {
-    gap: 10px;
-    border-bottom: 2px solid #C4A47C !important;
-    background-color: transparent !important;
-}
-.stTabs [data-baseweb="tab"] {
-    font-family: 'Cinzel', serif !important;
-    font-size: 1.05rem !important;
-    font-weight: 700 !important;
-    color: #6B1D2F !important;
-    background-color: #EFE8DC !important;
-    border: 1px solid #D5C2A5 !important;
-    border-bottom: none !important;
-    border-radius: 4px 4px 0 0 !important;
-    padding: 10px 20px !important;
-    letter-spacing: 1px !important;
-}
-.stTabs [aria-selected="true"] {
-    background-color: #540D1A !important;
-    color: #F7F3EB !important;
-    border: 1px solid #C4A47C !important;
-    border-bottom: none !important;
-}
-
-/* Regal Styled Table */
+/* Tables */
 table {
     border: 2px solid #C4A47C !important;
     border-collapse: collapse !important;
@@ -132,41 +156,42 @@ th {
     border: 1px solid #C4A47C !important;
 }
 td {
-    color: #380C14 !important;
+    color: #000000 !important;
     font-family: 'Cormorant Garamond', Georgia, serif !important;
     font-size: 1.25rem !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     padding: 10px !important;
     border: 1px solid #E5D6C0 !important;
     text-align: center !important;
 }
 
-/* Hero Banner Container */
+/* ==========================================
+   HERO BOX - GLOWING GOLD & WARM CREAM TEXT
+   ========================================== */
 .hero-box {
-    background: linear-gradient(135deg, #4A0E17 0%, #2A050B 100%);
-    border: 2px solid #C4A47C;
-    border-radius: 6px;
-    padding: 24px 30px;
-    margin-bottom: 25px;
-    box-shadow: 0 6px 18px rgba(59, 10, 17, 0.25);
-    color: #F7F3EB;
+    background: linear-gradient(135deg, #4A0E17 0%, #2A050B 100%) !important;
+    border: 2px solid #C4A47C !important;
+    border-radius: 6px !important;
+    padding: 24px 30px !important;
+    margin-bottom: 25px !important;
+    box-shadow: 0 6px 18px rgba(59, 10, 17, 0.25) !important;
 }
-.hero-title {
-    font-family: 'Cinzel Decorative', 'Cinzel', serif;
-    font-size: 2.3rem;
-    font-weight: 900;
-    color: #EBD9B4;
-    letter-spacing: 2px;
-    margin-bottom: 6px;
+.hero-box .hero-title, .hero-title {
+    font-family: 'Cinzel Decorative', 'Cinzel', serif !important;
+    font-size: 2.3rem !important;
+    font-weight: 900 !important;
+    color: #EBD9B4 !important; /* Elegant Royal Gold */
+    letter-spacing: 2px !important;
+    margin-bottom: 6px !important;
 }
-.hero-subtitle {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.35rem;
-    color: #F7F3EB;
-    font-style: italic;
+.hero-box .hero-subtitle, .hero-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: 1.35rem !important;
+    color: #F7F3EB !important; /* Bright Warm Cream */
+    font-style: italic !important;
 }
 
-/* Old Fashioned Typewriter Result Cards on Pure White Background */
+/* Typewriter Result Cards */
 .result-stay {
     background-color: #FFFFFF !important;
     border: 2.5px solid #2D6A4F !important;
@@ -183,7 +208,7 @@ td {
 }
 .result-stay p {
     font-family: 'Special Elite', 'Courier New', monospace !important;
-    color: #1F2421 !important;
+    color: #000000 !important;
     font-size: 1.2rem !important;
     margin-top: 10px !important;
     line-height: 1.5 !important;
@@ -205,7 +230,7 @@ td {
 }
 .result-churn p {
     font-family: 'Special Elite', 'Courier New', monospace !important;
-    color: #2B070E !important;
+    color: #000000 !important;
     font-size: 1.2rem !important;
     margin-top: 10px !important;
     line-height: 1.5 !important;
