@@ -113,25 +113,29 @@ label, .stSelectbox label, .stSlider label, .stNumberInput label {
     font-size: 1.15rem !important;
 }
 
-/* Regal Burgundy & Gold Button */
+/* Regal Burgundy & Gold Button with Bright White Text */
 .stButton > button {
-    font-family: 'Cinzel', serif !important;
-    font-weight: 800 !important;
-    font-size: 1.1rem !important;
-    letter-spacing: 2px !important;
-    text-transform: uppercase !important;
     background: linear-gradient(135deg, #6B1D2F 0%, #440A12 100%) !important;
-    color: #FFFFFF !important;
     border: 2px solid #C4A47C !important;
     border-radius: 4px !important;
     box-shadow: 0 4px 12px rgba(62, 10, 17, 0.35) !important;
     padding: 12px 24px !important;
     transition: all 0.3s ease !important;
 }
+.stButton > button, 
+.stButton > button p, 
+.stButton > button span, 
+.stButton > button div {
+    font-family: 'Cinzel', serif !important;
+    font-weight: 800 !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    color: #FFFFFF !important; /* FIXED: Crisp white button text */
+}
 .stButton > button:hover {
     background: linear-gradient(135deg, #800020 0%, #5A111E 100%) !important;
     border-color: #E2C799 !important;
-    color: #FFFFFF !important;
     transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(62, 10, 17, 0.5) !important;
 }
@@ -297,7 +301,7 @@ with tab_predict:
         st.markdown(f"**Active Model:** `{selected_model_name}`")
         st.markdown("---")
         st.markdown("### 📌 Vital Customer Indicators")
-        st.caption("Month-to-month contracts and high monthly billing are the heaviest drivers of customer departure.")
+        st.caption("Month-to-month contracts, electronic checks, and fiber optic service are heavy drivers of customer departure.")
 
     st.markdown("### Customer Subscription & Billing Profile")
     st.write("Input subscriber details below to compute churn probability and retention recommendations.")
@@ -361,12 +365,11 @@ with tab_predict:
         }
         
         input_df = pd.DataFrame([raw_input])
-        input_encoded = pd.get_dummies(input_df, columns=preprocessor['categorical_cols'], drop_first=True, dtype=int)
         
-        for col in preprocessor['all_feature_names']:
-            if col not in input_encoded.columns:
-                input_encoded[col] = 0
-        input_encoded = input_encoded[preprocessor['all_feature_names']]
+        # Robust one-hot encoding for single inference row:
+        # Generate dummy indicators and align exactly with the preprocessor feature space
+        input_encoded = pd.get_dummies(input_df, columns=preprocessor['categorical_cols'], dtype=int)
+        input_encoded = input_encoded.reindex(columns=preprocessor['all_feature_names'], fill_value=0)
         
         input_scaled = input_encoded.copy()
         input_scaled[preprocessor['numerical_cols']] = preprocessor['scaler'].transform(
