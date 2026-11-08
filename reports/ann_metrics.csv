@@ -1,0 +1,2 @@
+Model,Accuracy,Precision,Recall,F1_Score,ROC_AUC,Best_Params
+ANN,0.7928,0.6213,0.5615,0.5899,0.8346,64-32-16 Dense + Dropout + Adam

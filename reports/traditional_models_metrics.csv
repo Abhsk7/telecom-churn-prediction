@@ -1,0 +1,4 @@
+Model,Accuracy,Precision,Recall,F1_Score,ROC_AUC,Best_Params
+Logistic_Regression,0.802,0.6518,0.5455,0.5939,0.8389,"{'C': 10.0, 'solver': 'lbfgs'}"
+KNN,0.7878,0.6106,0.5535,0.5806,0.8118,"{'metric': 'manhattan', 'n_neighbors': 11, 'weights': 'uniform'}"
+Random_Forest,0.7949,0.6721,0.4439,0.5346,0.8402,"{'max_depth': 5, 'min_samples_split': 2, 'n_estimators': 150}"
